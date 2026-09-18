@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botiax - FIT 2026</title>
+    <!-- Font Awesome Icons & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cinzel:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-primary: #1A1533;
+            --bg-card: #241E47;
+            --bg-card-hover: #2E2759;
+            --brand-orange: #E08B00;
+            --brand-orange-light: #F5A623;
+            --brand-orange-glow: rgba(224, 139, 0, 0.25);
+            --text-main: #FFFFFF;
+            --text-muted: #B8B3D3;
+            --border-color: rgba(224, 139, 0, 0.2);
+            --whatsapp-green: #25D366;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(224, 139, 0, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(36, 30, 71, 0.5) 0%, transparent 50%);
+            background-attachment: fixed;
+            padding-bottom: 2rem;
+        }
+
+        /* HEADER REDUCIDO */
+        header {
+            background: rgba(26, 21, 51, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.75rem 1.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            height: 38px;
+            object-fit: contain;
+        }
+
+        .fit-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .fit-badge img {
+            height: 22px;
+            object-fit: contain;
+        }
+
+        .fit-badge span {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--brand-orange-light);
+        }
+
+        /* MAIN CONTENT CONTAINER */
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1.5rem 1rem;
+            width: 100%;
+            flex: 1;
+        }
+
+        /* BANNER COMPACTO DE PORTADA */
+        .hero-section {
+            text-align: center;
+            margin-bottom: 1.75rem;
+            padding: 1rem 1rem;
+            background: linear-gradient(180deg, rgba(36, 30, 71, 0.6) 0%, rgba(26, 21, 51, 0.4) 100%);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        .hero-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 0.3rem;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-title span {
+            color: var(--brand-orange-light);
+        }
+
+        .hero-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        /* SECCIONES Y GRIDS */
+        .section-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--brand-orange-light);
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        /* TARJETAS INTERACTIVAS */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            background: var(--bg-card-hover);
+            border-color: var(--brand-orange);
+            box-shadow: 0 8px 24px var(--brand-orange-glow);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(224, 139, 0, 0.12);
+            color: var(--brand-orange-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .card-icon.wpp {
+            background: rgba(37, 211, 102, 0.12);
+            color: var(--whatsapp-green);
+        }
+
+        .card-info h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.25rem;
+        }
+
+        .card-info p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.05);
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border-radius: 6px;
+            color: var(--text-muted);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* BOTONES DE ACCIÓN */
+        .card-actions {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 8px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 0.65rem 1rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--brand-orange) 0%, #C47900 100%);
+            color: #FFFFFF;
+        }
+
+        .btn-primary:hover {
+            filter: brightness(1.1);
+        }
+
+        .btn-wpp {
+            background: var(--whatsapp-green);
+            color: #FFFFFF;
+        }
+
+        .btn-wpp:hover {
+            filter: brightness(1.1);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-main);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-qr {
+            width: 42px;
+            height: 42px;
+            padding: 0;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--text-main);
+            border-radius: 10px;
+        }
+
+        .btn-qr:hover {
+            background: var(--brand-orange);
+            border-color: var(--brand-orange);
+            color: #fff;
+        }
+
+        /* SECCIÓN EXECUTIVE CONTACT & WEB */
+        .contact-card {
+            background: linear-gradient(135deg, rgba(36, 30, 71, 0.9) 0%, rgba(26, 21, 51, 0.9) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.25rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .executive-details {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .avatar {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: var(--brand-orange);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .exec-info h4 {
+            font-size: 1.05rem;
+            color: #fff;
+            margin-bottom: 2px;
+        }
+
+        .exec-info p {
+            font-size: 0.8rem;
+            color: var(--brand-orange-light);
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .contact-links-list {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            font-size: 0.82rem;
+        }
+
+        .contact-link-item {
+            color: var(--text-muted);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .contact-link-item:hover {
+            color: #fff;
+            border-color: var(--brand-orange);
+        }
+
+        /* WEB CARD BANNER */
+        .web-card {
+            background: linear-gradient(90deg, rgba(224, 139, 0, 0.15) 0%, rgba(36, 30, 71, 0.8) 100%);
+            border: 1px solid var(--brand-orange);
+            border-radius: 16px;
+            padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        /* MODAL DE QR */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 8, 20, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border: 1px solid var(--brand-orange);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 360px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            color: #fff;
+        }
+
+        .qr-box {
+            background: #fff;
+            padding: 12px;
+            border-radius: 12px;
+            margin: 1.25rem auto;
+            width: 180px;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qr-box img {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* MEDIA QUERIES */
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .web-card {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+
+            .web-card .card-actions {
+                margin-top: 0.5rem;
+            }
+
+            .hero-title {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <div class="logo-box">
+                <!-- Soporta botiaxlogonaranja.png o logo en fondo oscuro -->
+                <img src="botiaxlogonaranja.png" alt="Botiax" class="logo-img" onerror="this.onerror=null; this.src='Botiax fondo negro (1).png';">
+            </div>
+            
+            <div class="fit-badge">
+                <img src="fit.png" alt="FIT" onerror="this.style.display='none'">
+                <span>STAND FIT</span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- PORTADA COMPACTA DE INICIO -->
+        <section class="hero-section">
+            <h1 class="hero-title">Soluciones de IA para <span>tu empresa</span></h1>
+            <p class="hero-subtitle">Agentes Virtuales entrenados con IA para atender, vender y fidelizar 24/7</p>
+        </section>
+
+        <!-- SECCIÓN 1: CONTACTO DIRECTO (WHATSAPP & FORMULARIO) -->
+        <div class="section-label">
+            <i class="fa-solid fa-paper-plane"></i> Contacto Inmediato
+        </div>
+        <div class="grid-2">
+            <!-- Formulario -->
+            <div class="card">
+                <div>
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fa-solid fa-clipboard-list"></i>
+                        </div>
+                        <div class="card-info">
+                            <h3>Recibí información de Botiax</h3>
+                            <p>Completá el formulario para ponernos en contacto y enviarte la propuesta adecuada.</p>
+                        </div>
+                    </div>
+                    <div class="tags-container">
+                        <span class="tag">Formulario Oficial</span>
+                        <span class="tag">Respuesta Rápida</span>
+                    </div>
+                </div>
+                <div class="card-actions">
+                    <a href="https://zfrmz.com/Gz0rNJuROkhdmypW1iU9" target="_blank" class="btn btn-primary">
+                        Completar Formulario <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <button class="btn btn-qr" onclick="openQR('https://zfrmz.com/Gz0rNJuROkhdmypW1iU9', 'Recibí información de Botiax')" title="Mostrar QR">
+                        <i class="fa-solid fa-qrcode"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- WhatsApp Directo -->
+            <div class="card">
+                <div>
+                    <div class="card-header">
+                        <div class="card-icon wpp">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </div>
+                        <div class="card-info">
+                            <h3>WhatsApp Directo</h3>
+                            <p>Chateá al instante con nuestra línea de atención telefónica oficial.</p>
+                        </div>
+                    </div>
+                    <div class="tags-container">
+                        <span class="tag">+54 9 11 6569-8921</span>
+                        <span class="tag">Atención en vivo</span>
+                    </div>
+                </div>
+                <div class="card-actions">
+                    <a href="https://wa.me/5491165698921" target="_blank" class="btn btn-wpp">
+                        Iniciar Chat <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                    <button class="btn btn-qr" onclick="openQR('https://wa.me/5491165698921', 'WhatsApp Directo Botiax')" title="Mostrar QR">
+                        <i class="fa-solid fa-qrcode"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 2: DEMOS INTERACTIVAS -->
+        <div class="section-label">
+            <i class="fa-solid fa-laptop-code"></i> Demos Interactivas
+        </div>
+        <div class="grid-2">
+            <!-- Demo Agencias -->
+            <div class="card">
+                <div>
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fa-solid fa-plane-departure"></i>
+                        </div>
+                        <div class="card-info">
+                            <h3>Demo Agencias</h3>
+                            <p>Probá la experiencia de atención omnicanal inteligente para agencias de viajes.</p>
+                        </div>
+                    </div>
+                    <div class="tags-container">
+                        <span class="tag">Paquetes</span>
+                        <span class="tag">Cotizaciones</span>
+                        <span class="tag">Ventas IA</span>
+                    </div>
+                </div>
+                <div class="card-actions">
+                    <a href="https://botiaxok.github.io/BotiaxAgencias" target="_blank" class="btn btn-primary">
+                        Probar Demo <i class="fa-solid fa-up-right-from-square"></i>
+                    </a>
+                    <button class="btn btn-qr" onclick="openQR('https://botiaxok.github.io/BotiaxAgencias', 'Demo Agencias')" title="Mostrar QR">
+                        <i class="fa-solid fa-qrcode"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Demo Hoteles -->
+            <div class="card">
+                <div>
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fa-solid fa-hotel"></i>
+                        </div>
+                        <div class="card-info">
+                            <h3>Demo Hoteles</h3>
+                            <p>Asistente virtual diseñado para asesoramiento y atención de huéspedes.</p>
+                        </div>
+                    </div>
+                    <div class="tags-container">
+                        <span class="tag">Hotelería</span>
+                        <span class="tag">Asesoramiento</span>
+                        <span class="tag">Concierge IA</span>
+                    </div>
+                </div>
+                <div class="card-actions">
+                    <a href="https://botiaxok.github.io/BotiaxHotel" target="_blank" class="btn btn-primary">
+                        Probar Demo <i class="fa-solid fa-up-right-from-square"></i>
+                    </a>
+                    <button class="btn btn-qr" onclick="openQR('https://botiaxok.github.io/BotiaxHotel', 'Demo Hoteles')" title="Mostrar QR">
+                        <i class="fa-solid fa-qrcode"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 3: CONTACTO COMERCIAL EJECUTIVO -->
+        <div class="section-label">
+            <i class="fa-solid fa-user-tie"></i> Equipo Comercial
+        </div>
+        <div class="contact-card">
+            <div class="executive-details">
+                <div class="avatar">VE</div>
+                <div class="exec-info">
+                    <h4>Valeria Espinosa</h4>
+                    <p>Ejecutiva Comercial Botiax</p>
+                    <div class="contact-links-list">
+                        <a href="tel:+51962623331" class="contact-link-item">
+                            <i class="fa-solid fa-phone"></i> +51 962 623 331
+                        </a>
+                        <a href="mailto:vespinosa@botiax.com" class="contact-link-item">
+                            <i class="fa-solid fa-envelope"></i> vespinosa@botiax.com
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-actions" style="grid-template-columns: 1fr auto;">
+                <a href="https://wa.me/51962623331" target="_blank" class="btn btn-wpp">
+                    Contactar a Valeria <i class="fa-brands fa-whatsapp"></i>
+                </a>
+                <button class="btn btn-qr" onclick="openQR('https://wa.me/51962623331', 'Valeria Espinosa - Botiax')" title="Mostrar QR">
+                    <i class="fa-solid fa-qrcode"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 4: SITIO WEB OFICIAL -->
+        <div class="web-card">
+            <div class="card-info">
+                <h3 style="font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 2px;">
+                    <i class="fa-solid fa-globe" style="color: var(--brand-orange-light); margin-right: 6px;"></i> Sitio Web Oficial
+                </h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Botiax – Brinda a tus clientes la atención que se merecen.</p>
+            </div>
+            <div class="card-actions">
+                <a href="https://botiax.com" target="_blank" class="btn btn-secondary">
+                    Visitar botiax.com <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <button class="btn btn-qr" onclick="openQR('https://botiax.com', 'Web Botiax')" title="Mostrar QR">
+                    <i class="fa-solid fa-qrcode"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- MODAL DE CÓDIGO QR DEDICADO -->
+    <div id="qrModal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeQR()">&times;</button>
+            <h3 id="qrTitle" style="color: var(--text-main); font-size: 1.1rem; margin-bottom: 4px;">Escanear QR</h3>
+            <p style="color: var(--text-muted); font-size: 0.8rem;">Apuntá con la cámara de tu celular</p>
+            
+            <div class="qr-box">
+                <img id="qrImage" src="" alt="Código QR">
+            </div>
+
+            <button class="btn btn-secondary" onclick="closeQR()" style="width: 100%;">
+                Cerrar
+            </button>
+        </div>
+    </div>
+
+    <!-- SCRIPT QR DYN -->
+    <script>
+        function openQR(url, title) {
+            const modal = document.getElementById('qrModal');
+            const qrImage = document.getElementById('qrImage');
+            const qrTitle = document.getElementById('qrTitle');
+
+            qrTitle.textContent = title;
+            // API pública rápida para renderizar código QR limpio
+            qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}&color=1A1533`;
+
+            modal.classList.add('active');
+        }
+
+        function closeQR() {
+            document.getElementById('qrModal').classList.remove('active');
+        }
+
+        // Cerrar al tocar fuera del modal
+        window.onclick = function(event) {
+            const modal = document.getElementById('qrModal');
+            if (event.target === modal) {
+                closeQR();
+            }
+        };
+    </script>
+</body>
+</html>
